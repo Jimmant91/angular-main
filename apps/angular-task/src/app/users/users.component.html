@@ -1,7 +1,17 @@
 <div class="container">
-    <h1>Users</h1>
+    <div class="filter-toolbar">
+        <input (input)="filterUsers($event)" pInputText placeholder="Search by name or email" />
+        <p-dropdown (onChange)="sortUsers()" [(ngModel)]="sortKey" [options]="sortOptions" [style]="{ width: '150px' }" placeholder="Sort by" />
+        <p-dropdown
+            (onChange)="filterByCompany()"
+            [(ngModel)]="selectedCompany"
+            [options]="companyOptions"
+            [style]="{ width: '200px' }"
+            placeholder="Filter by company"
+        />
+    </div>
     <div class="card-container">
-        @for (user of users; track user.id) {
+        @for (user of filteredUsers; track user.id) {
             <p-card [header]="user.name" [style]="{ width: '360px' }" [subheader]="user.email">
                 <ng-template pTemplate="header">
                     <img [alt]="user.name" [src]="getAvatarForUser(user.name)" style="width: 100%; height: 200px; object-fit: cover" />
