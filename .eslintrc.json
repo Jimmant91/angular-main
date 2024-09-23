@@ -40,6 +40,18 @@
             "allowCircularSelfDependency": true,
             "depConstraints": [
               {
+                "sourceTag": "*",
+                "onlyDependOnLibsWithTags": ["*"]
+              },
+              {
+                "sourceTag": "type:app",
+                "onlyDependOnLibsWithTags": ["type:lib", "type:feature", "type:data-access", "type:ui", "type:util"]
+              },
+              {
+                "sourceTag": "scope:angular-task",
+                "onlyDependOnLibsWithTags": ["scope:shared"]
+              },
+              {
                 "sourceTag": "type:feature",
                 "onlyDependOnLibsWithTags": ["type:data-access", "type:feature", "type:ui", "type:util"]
               },

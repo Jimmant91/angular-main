@@ -1,1 +1,1 @@
-export * from './lib/shared-services/shared-services.component';
+export * from './lib/users.service';
