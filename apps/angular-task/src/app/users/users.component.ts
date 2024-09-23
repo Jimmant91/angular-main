@@ -4,6 +4,7 @@ import { PrimengImportsModule } from '../primeng-imports/primeng-imports.module'
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { PhoneFormatPipe } from '../pipes/phone-format.pipe';
 
 @Component({
     selector: 'crx-users',
@@ -12,6 +13,7 @@ import { RouterModule } from '@angular/router';
         CommonModule,
         FormsModule,
         RouterModule,
+        PhoneFormatPipe,
         PrimengImportsModule
     ],
     templateUrl: './users.component.html',

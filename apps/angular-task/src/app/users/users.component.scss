@@ -1,5 +1,5 @@
 .container {
-    padding-top: 6rem; // Adjust this value based on your toolbar height
+    padding-top: 6rem;
 }
 
 .filter-toolbar {
@@ -21,4 +21,41 @@
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
+}
+
+:host ::ng-deep {
+    .p-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        .p-card-body {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .p-card-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    }
+}
+
+.card-container > * {
+    display: flex;
+    height: 590px;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.card-footer {
+    margin-top: auto;
 }
