@@ -1,20 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
 import { UsersService, User } from '@angular-task/shared/services';
 
 @Component({
     selector: 'crx-root',
     standalone: true,
-    imports: [CommonModule],
-    template: `
-    <h1>Users</h1>
-    <ul>
-      <li *ngFor="let user of users">{{ user.name }} ({{ user.email }})</li>
-    </ul>
-  `,
+    imports: [CommonModule, CardModule, ButtonModule],
+    templateUrl: './users.component.html',
+    styleUrls: ['./users.component.scss']
 })
 export class AppComponent implements OnInit {
 
+    title = 'angular-task';
     users: User[] = [];
 
     constructor (private usersService: UsersService) {}

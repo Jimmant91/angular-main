@@ -1,0 +1,21 @@
+<div class="container">
+    <h1>Users</h1>
+    <div class="card-container">
+        @for (user of users; track user.id) {
+            <p-card [header]="user.name" [style]="{ width: '360px' }" [subheader]="user.email">
+                <ng-template pTemplate="header">
+                    <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" />
+                </ng-template>
+                <p><strong>Phone:</strong> {{ user.phone }}</p>
+                <p><strong>Website:</strong> {{ user.website }}</p>
+                <p><strong>Company:</strong> {{ user.company.name }}</p>
+                <p><strong>Address:</strong> {{ user.address.street }}, {{ user.address.city }}</p>
+                <ng-template pTemplate="footer">
+                    <p-button icon="pi pi-user" label="View Details" />
+                </ng-template>
+            </p-card>
+        } @empty {
+            <p>No users found.</p>
+        }
+    </div>
+</div>
