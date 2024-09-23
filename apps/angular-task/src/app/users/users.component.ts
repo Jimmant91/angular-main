@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
-import { UsersService, User } from '@angular-task/shared/services';
+import { UsersService, User, UserImageService } from '@angular-task/shared/services';
 
 @Component({
     selector: 'crx-users',
@@ -16,7 +16,10 @@ export class UsersComponent implements OnInit {
 
     users: User[] = [];
 
-    constructor (private usersService: UsersService) {}
+    constructor (
+        private usersService: UsersService,
+        private userImageService: UserImageService
+    ) {}
 
     ngOnInit () {
 
@@ -32,6 +35,12 @@ export class UsersComponent implements OnInit {
 
             },
         });
+
+    }
+
+    getAvatarForUser (name: string): string {
+
+        return this.userImageService.getAvatarForUser(name);
 
     }
 

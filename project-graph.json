@@ -318,7 +318,63 @@
           "projectType": "application",
           "prefix": "crx",
           "sourceRoot": "apps/angular-task/src",
-          "tags": [],
+          "tags": [
+            "type:app, scope:angular-task"
+          ],
+          "implicitDependencies": []
+        }
+      },
+      "shared-services": {
+        "name": "shared-services",
+        "type": "lib",
+        "data": {
+          "root": "shared/services",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "{workspaceRoot}/.eslintrc.json",
+                "{workspaceRoot}/.eslintignore",
+                "{workspaceRoot}/eslint.config.js"
+              ]
+            },
+            "test": {
+              "executor": "@nx/jest:jest",
+              "outputs": [
+                "{workspaceRoot}/coverage/{projectRoot}"
+              ],
+              "options": {
+                "jestConfig": "shared/services/jest.config.ts",
+                "passWithNoTests": true
+              },
+              "configurations": {
+                "ci": {
+                  "ci": true,
+                  "codeCoverage": true
+                }
+              },
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "^production",
+                "{workspaceRoot}/jest.preset.js"
+              ]
+            }
+          },
+          "name": "shared-services",
+          "$schema": "../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "shared/services/src",
+          "prefix": "lib",
+          "projectType": "library",
+          "tags": [
+            "type:lib, scope:shared"
+          ],
           "implicitDependencies": []
         }
       }
@@ -331,7 +387,14 @@
           "type": "implicit"
         }
       ],
-      "angular-task": []
+      "angular-task": [
+        {
+          "source": "angular-task",
+          "target": "shared-services",
+          "type": "static"
+        }
+      ],
+      "shared-services": []
     }
   }
 }

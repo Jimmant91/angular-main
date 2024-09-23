@@ -4,7 +4,7 @@
         @for (user of users; track user.id) {
             <p-card [header]="user.name" [style]="{ width: '360px' }" [subheader]="user.email">
                 <ng-template pTemplate="header">
-                    <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" />
+                    <img [alt]="user.name" [src]="getAvatarForUser(user.name)" style="width: 100%; height: 200px; object-fit: cover" />
                 </ng-template>
                 <p><strong>Phone:</strong> {{ user.phone }}</p>
                 <p><strong>Website:</strong> {{ user.website }}</p>
