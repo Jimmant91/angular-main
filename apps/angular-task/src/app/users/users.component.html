@@ -1,12 +1,12 @@
 <div class="container">
     <div class="filter-toolbar">
-        <input (input)="filterUsers($event)" pInputText placeholder="Search by name or email" />
+        <input (input)="filterUsers($event)" [style]="{ width: '215px' }" pInputText placeholder="Search by name or email" />
         <p-dropdown (onChange)="sortUsers()" [(ngModel)]="sortKey" [options]="sortOptions" [style]="{ width: '150px' }" placeholder="Sort by" />
         <p-dropdown
             (onChange)="filterByCompany()"
             [(ngModel)]="selectedCompany"
             [options]="companyOptions"
-            [style]="{ width: '200px' }"
+            [style]="{ width: '215px' }"
             placeholder="Filter by company"
         />
     </div>
