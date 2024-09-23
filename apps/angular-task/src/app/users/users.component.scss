@@ -54,6 +54,14 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+    a {
+        color: #007bff;
+        text-decoration: none;
+
+        &:hover {
+            color: #0056b3;
+        }
+    }
 }
 
 .card-footer {

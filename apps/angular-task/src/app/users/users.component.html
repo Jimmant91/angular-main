@@ -1,23 +1,26 @@
 <div class="container">
     <div class="filter-toolbar">
-        <input (input)="filterUsers($event)" [style]="{ width: '215px' }" pInputText placeholder="Search by name or email" />
+        <input (input)="filterUsers($event)" pInputText placeholder="Search by name or email" />
         <p-dropdown (onChange)="sortUsers()" [(ngModel)]="sortKey" [options]="sortOptions" [style]="{ width: '150px' }" placeholder="Sort by" />
         <p-dropdown
             (onChange)="filterByCompany()"
             [(ngModel)]="selectedCompany"
             [options]="companyOptions"
-            [style]="{ width: '215px' }"
+            [style]="{ width: '200px' }"
             placeholder="Filter by company"
         />
     </div>
     <div class="card-container">
         @for (user of filteredUsers; track user.id) {
-            <p-card [header]="user.name" [style]="{ width: '360px' }" [subheader]="user.email">
+            <p-card [header]="user.name" [style]="{ width: '360px' }">
                 <ng-template pTemplate="header">
                     <img [alt]="user.name" [src]="getAvatarForUser(user.name)" style="width: 100%; height: 200px; object-fit: cover" />
                 </ng-template>
                 <div class="user-details">
                     <div>
+                        <p>
+                            <strong>Email: </strong> <a [href]="' ' + 'mailto:' + user.email">{{ user.email | lowercase }}</a>
+                        </p>
                         <p><strong>Phone:</strong> {{ user.phone | phoneFormat }}</p>
                         <p><strong>Website:</strong> {{ user.website }}</p>
                         <p><strong>Company:</strong> {{ user.company.name }}</p>
