@@ -1,10 +1,60 @@
 @if (user) {
-    <p-card [header]="user.name" [subheader]="user.email">
-        <p>Phone: {{ user.phone }}</p>
-        <p>Website: {{ user.website }}</p>
-        <p>Company: {{ user.company.name }}</p>
-        <p>Address: {{ user.address.street }}, {{ user.address.city }}</p>
-    </p-card>
+    <div class="user-profile-container">
+        <p-card>
+            <ng-template pTemplate="header">
+                <div class="profile-header">
+                    <img [alt]="user.name" [src]="getAvatarForUser(user.name)" class="profile-avatar" />
+                    <h2>{{ user.name }}</h2>
+                    <div [pTooltip]="isFavorite(user.id) ? 'Remove from favorites' : 'Add to favorites'" class="favorite-button">
+                        <p-button
+                            (onClick)="toggleFavorite(user.id)"
+                            [icon]="isFavorite(user.id) ? 'pi pi-star-fill' : 'pi pi-star'"
+                            [styleClass]="isFavorite(user.id) ? 'p-button-warning' : 'p-button-secondary'"
+                        />
+                    </div>
+                </div>
+            </ng-template>
+
+            <p-panel header="Contact Information">
+                <div class="p-grid">
+                    <div class="p-col-4"><strong>Email:</strong></div>
+                    <div class="p-col-8">
+                        <a [href]="'mailto:' + user.email">{{ user.email | lowercase }}</a>
+                    </div>
+                    <div class="p-col-4"><strong>Phone:</strong></div>
+                    <div class="p-col-8">{{ user.phone | phoneFormat }}</div>
+                    <div class="p-col-4"><strong>Website:</strong></div>
+                    <div class="p-col-8">
+                        <a [href]="'http://' + user.website" target="_blank">{{ user.website }}</a>
+                    </div>
+                </div>
+            </p-panel>
+
+            <p-panel header="Company Information">
+                <div class="p-grid">
+                    <div class="p-col-4"><strong>Name:</strong></div>
+                    <div class="p-col-8">{{ user.company.name }}</div>
+                    <div class="p-col-4"><strong>Catch Phrase:</strong></div>
+                    <div class="p-col-8">{{ user.company.catchPhrase }}</div>
+                    <div class="p-col-4"><strong>BS:</strong></div>
+                    <div class="p-col-8">{{ user.company.bs }}</div>
+                </div>
+            </p-panel>
+
+            <p-panel header="Address">
+                <div class="p-grid">
+                    <div class="p-col-4"><strong>Street:</strong></div>
+                    <div class="p-col-8">{{ user.address.street }}</div>
+                    <div class="p-col-4"><strong>Suite:</strong></div>
+                    <div class="p-col-8">{{ user.address.suite }}</div>
+                    <div class="p-col-4"><strong>City:</strong></div>
+                    <div class="p-col-8">{{ user.address.city }}</div>
+                    <div class="p-col-4"><strong>Zipcode:</strong></div>
+                    <div class="p-col-8">{{ user.address.zipcode }}</div>
+                </div>
+            </p-panel>
+        </p-card>
+    </div>
 } @else {
-    <p>Loading user profile...</p>
+    <p-message severity="info" text="User not found" />
 }

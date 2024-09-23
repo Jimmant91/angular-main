@@ -21,8 +21,21 @@ export class FavoritesService {
         const storedFavorites = this.localStorageService.getItem('favorites');
         if (storedFavorites) {
 
-            this.favorites = new Set(JSON.parse(storedFavorites));
-            this.favoritesSubject.next(this.favorites);
+            try {
+
+                const parsedFavorites = JSON.parse(storedFavorites);
+                if (Array.isArray(parsedFavorites)) {
+
+                    this.favorites = new Set(parsedFavorites);
+                    this.favoritesSubject.next(this.favorites);
+
+                }
+
+            } catch (error) {
+
+                console.error('Error parsing favorites:', error);
+
+            }
 
         }
 

@@ -1,5 +1,6 @@
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable({
     providedIn: 'root'
@@ -9,8 +10,8 @@ export class LocalStorageService {
     private storage: Storage | null = null;
 
     constructor (
-        @Inject(DOCUMENT) private document: Document,
-        @Inject(PLATFORM_ID) private platformId: string
+        @Inject(PLATFORM_ID) private platformId: object,
+        @Inject(DOCUMENT) private document: Document
     ) {
 
         if (isPlatformBrowser(this.platformId)) {
@@ -29,7 +30,7 @@ export class LocalStorageService {
 
     getItem (key: string): string | null {
 
-        return this.storage?.getItem(key) || null;
+        return this.storage?.getItem(key) ?? null;
 
     }
 

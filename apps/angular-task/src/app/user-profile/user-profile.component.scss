@@ -1,0 +1,50 @@
+.user-profile-container {
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+:host ::ng-deep {
+    .p-panel {
+        margin-bottom: 1rem;
+    }
+
+    .p-grid {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .p-col-4 {
+        flex: 0 0 33.3333%;
+        max-width: 33.3333%;
+    }
+
+    .p-col-8 {
+        flex: 0 0 66.6667%;
+        max-width: 66.6667%;
+    }
+
+    .p-button.p-button-secondary {
+        background-color: #f4f4f4;
+        color: #333;
+        border: 1px solid #ccc;
+    }
+
+    .p-button.p-button-warning {
+        background-color: #ffca28;
+        color: #333;
+    }
+}

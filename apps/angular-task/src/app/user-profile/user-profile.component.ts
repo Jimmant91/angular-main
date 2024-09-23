@@ -1,27 +1,33 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { UsersService, User } from '@angular-task/shared/services';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { UsersService, User, UserImageService, FavoritesService } from '@angular-task/shared/services';
+import { PrimengImportsModule } from '../primeng-imports/primeng-imports.module';
 import { CommonModule } from '@angular/common';
-import { CardModule } from 'primeng/card';
+import { PhoneFormatPipe } from '../pipes/phone-format.pipe';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'crx-user-profile',
     standalone: true,
-    imports: [CommonModule, CardModule],
+    imports: [CommonModule, PrimengImportsModule, PhoneFormatPipe, FormsModule],
     templateUrl: './user-profile.component.html',
     styleUrls: ['./user-profile.component.scss']
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent {
 
-    @Input() id = '';
     user: User | null = null;
 
-    constructor (private usersService: UsersService) {}
+    constructor (
+        private route: ActivatedRoute,
+        private usersService: UsersService,
+        private userImageService: UserImageService,
+        private favoritesService: FavoritesService
+    ) {
 
-    ngOnInit () {
+        const userId = this.route.snapshot.paramMap.get('id');
+        if (userId) {
 
-        if (this.id) {
-
-            this.usersService.getUserById(+this.id).subscribe({
+            this.usersService.getUserById(+userId).subscribe({
                 next: (user) => {
 
                     this.user = user;
@@ -35,6 +41,24 @@ export class UserProfileComponent implements OnInit {
             });
 
         }
+
+    }
+
+    getAvatarForUser (name: string): string {
+
+        return this.userImageService.getAvatarForUser(name);
+
+    }
+
+    toggleFavorite (userId: number): void {
+
+        this.favoritesService.toggleFavorite(userId);
+
+    }
+
+    isFavorite (userId: number): boolean {
+
+        return this.favoritesService.isFavorite(userId);
 
     }
 
