@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService, User, UserImageService } from '@angular-task/shared/services';
+import { UsersService, User, UserImageService, FavoritesService } from '@angular-task/shared/services';
 import { PrimengImportsModule } from '../primeng-imports/primeng-imports.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -36,7 +36,8 @@ export class UsersComponent implements OnInit {
 
     constructor (
         private usersService: UsersService,
-        private userImageService: UserImageService
+        private userImageService: UserImageService,
+        private favoritesService: FavoritesService,
     ) {}
 
     ngOnInit () {
@@ -120,6 +121,18 @@ export class UsersComponent implements OnInit {
 
         const uniqueCompanies = [...new Set(this.users.map((user) => user.company.name))];
         return uniqueCompanies.map((company) => ({ label: company, value: company }));
+
+    }
+
+    toggleFavorite (userId: number): void {
+
+        this.favoritesService.toggleFavorite(userId);
+
+    }
+
+    isFavorite (userId: number): boolean {
+
+        return this.favoritesService.isFavorite(userId);
 
     }
 

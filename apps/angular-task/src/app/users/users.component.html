@@ -19,7 +19,7 @@
                 <div class="user-details">
                     <div>
                         <p>
-                            <strong>Email: </strong> <a [href]="' ' + 'mailto:' + user.email">{{ user.email | lowercase }}</a>
+                            <strong>Email: </strong> <a [href]="'mailto:' + user.email">{{ user.email | lowercase }}</a>
                         </p>
                         <p><strong>Phone:</strong> {{ user.phone | phoneFormat }}</p>
                         <p><strong>Website:</strong> {{ user.website }}</p>
@@ -28,6 +28,12 @@
                     </div>
                     <div class="card-footer">
                         <p-button [routerLink]="['/users', user.id]" icon="pi pi-user" label="View Profile" />
+                        <p-button
+                            (onClick)="toggleFavorite(user.id)"
+                            [class]="isFavorite(user.id) ? 'p-button-warning' : 'p-button-secondary'"
+                            [icon]="isFavorite(user.id) ? 'pi pi-star-fill' : 'pi pi-star'"
+                            [pTooltip]="isFavorite(user.id) ? 'Remove from favorites' : 'Add to favorites'"
+                        />
                     </div>
                 </div>
             </p-card>
