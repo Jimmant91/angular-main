@@ -1,9 +1,9 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { AppComponent } from './app/users.component';
+import { UsersComponent } from './app/users.component';
 import { importProvidersFrom } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
-bootstrapApplication(AppComponent, {
+bootstrapApplication(UsersComponent, {
     providers: [
         importProvidersFrom(HttpClientModule)
     ]

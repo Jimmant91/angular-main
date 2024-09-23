@@ -11,7 +11,7 @@ import { UsersService, User } from '@angular-task/shared/services';
     templateUrl: './users.component.html',
     styleUrls: ['./users.component.scss']
 })
-export class AppComponent implements OnInit {
+export class UsersComponent implements OnInit {
 
     title = 'angular-task';
     users: User[] = [];

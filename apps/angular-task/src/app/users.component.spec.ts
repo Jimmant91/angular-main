@@ -1,32 +1,52 @@
-import { TestBed } from '@angular/core/testing';
-import { AppComponent } from './users.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { UsersComponent } from './users.component';
 import { RouterModule } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { UsersService } from '@angular-task/shared/services';
+import { of } from 'rxjs';
 
-describe('AppComponent', () => {
+describe('UsersComponent', () => {
+
+    let component: UsersComponent;
+    let fixture: ComponentFixture<UsersComponent>;
+    let usersService: jasmine.SpyObj<UsersService>;
 
     beforeEach(async () => {
 
+        const spy = jasmine.createSpyObj('UsersService', ['getUsers']);
+
         await TestBed.configureTestingModule({
-            imports: [AppComponent, RouterModule.forRoot([])],
+            imports: [UsersComponent, RouterModule.forRoot([]), HttpClientTestingModule],
+            providers: [{ provide: UsersService, useValue: spy }]
         }).compileComponents();
+
+        fixture = TestBed.createComponent(UsersComponent);
+        component = fixture.componentInstance;
+        usersService = TestBed.inject(UsersService) as jasmine.SpyObj<UsersService>;
+        usersService.getUsers.and.returnValue(of([]));
+        fixture.detectChanges();
+
+    });
+
+    it('should create', () => {
+
+        expect(component).toBeTruthy();
 
     });
 
     it('should render title', () => {
 
-        const fixture = TestBed.createComponent(AppComponent);
-        fixture.detectChanges();
         const compiled = fixture.nativeElement as HTMLElement;
-        expect(compiled.querySelector('h1')?.textContent).toContain('User Management');
+        expect(compiled.querySelector('h1')?.textContent).toContain('Users');
 
     });
 
-    it(`should have as title 'angular-task'`, () => {
+    it('should call getUsers on init', () => {
 
-        const fixture = TestBed.createComponent(AppComponent);
-        const app = fixture.componentInstance;
-        expect(app.title).toEqual('angular-task');
+        expect(usersService.getUsers).toHaveBeenCalled();
 
     });
+
+    // Add more tests as needed for your component's functionality
 
 });
