@@ -6,7 +6,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class PhoneFormatPipe implements PipeTransform {
 
-    transform (phoneNumber: string): string {
+    transform (phoneNumber: string | undefined): string {
+
+        if (!phoneNumber) {
+
+            return '';
+
+        }
 
         // Remove all non-digit characters
         const cleaned = phoneNumber.replace(/\D/g, '');
@@ -20,7 +26,6 @@ export class PhoneFormatPipe implements PipeTransform {
 
         }
 
-        // If the number doesn't match the expected format, return the original
         return phoneNumber;
 
     }
