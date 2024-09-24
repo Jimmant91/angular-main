@@ -5,11 +5,12 @@ import { PrimengImportsModule } from '../primeng-imports/primeng-imports.module'
 import { CommonModule } from '@angular/common';
 import { PhoneFormatPipe } from '../pipes/phone-format.pipe';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @Component({
     selector: 'crx-user-profile',
     standalone: true,
-    imports: [CommonModule, PrimengImportsModule, PhoneFormatPipe, FormsModule],
+    imports: [CommonModule, PrimengImportsModule, PhoneFormatPipe, FormsModule, RouterModule],
     templateUrl: './user-profile.component.html',
     styleUrls: ['./user-profile.component.scss']
 })

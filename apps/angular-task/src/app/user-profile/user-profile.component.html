@@ -1,4 +1,3 @@
-<p-button icon="pi pi-arrow-left" label="Back" styleClass="p-button-secondary" />
 @if (user) {
     <div class="user-profile-container">
         <p-card>
@@ -59,3 +58,6 @@
 } @else {
     <p-message severity="info" text="User not found" />
 }
+<div class="back-button-container">
+    <p-button [routerLink]="['/users']" icon="pi pi-arrow-left" label="Back to All Users" styleClass="p-button-primary" />
+</div>
